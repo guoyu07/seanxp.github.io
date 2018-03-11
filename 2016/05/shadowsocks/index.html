@@ -117,7 +117,7 @@
 <meta property="og:image" content="http://seanxp.com/images/2016/shadowsocks-5.png">
 <meta property="og:image" content="http://seanxp.com/images/2016/shadowsocks-6.png">
 <meta property="og:image" content="http://seanxp.com/images/2016/shadowsocks-4.png">
-<meta property="og:updated_time" content="2018-03-11T02:29:34.400Z">
+<meta property="og:updated_time" content="2018-03-11T05:50:27.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shadowsocks">
 <meta name="twitter:description" content="Across the Great Wall we can reach every corner in the world.「越过长城，走向世界每个角落」中国互联网发送的第一封电子邮件（1987年）">
@@ -404,19 +404,28 @@
 <li>4,5) 服务通过 ssh server，再通过创建好的隧道返回给用户;</li>
 </ul>
 <p><img src="/images/2016/shadowsocks-5.png" alt="shadowsocks-5"><br><img src="/images/2016/shadowsocks-6.png" alt="shadowsocks-6"><br>由于 ssh 本身就是基于 RSA 加密技术，所以 GFW 无法从数据传输的过程中的加密数据内容进行关键词分析，避免了被重置链接的问题，但由于创建隧道和数据传输的过程中，ssh 本身的特征是明显的，所以 GFW 一度通过分析连接的特征进行干扰，导致 ssh 存在被定向进行干扰的问题。</p>
-<h2 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h2><p>于是 <a href="https://github.com/shadowsocks/shadowsocks" target="_blank" rel="noopener">clowwindy</a>分享并开源了他的解决方案 - <a href="http://shadowsocks.org/" target="_blank" rel="noopener">shadowsocks</a>。<br>简单理解的话，shadowsocks 是将原来 ssh 创建的 Socks5 协议拆开成 server 端和 client 端，所以下面这个原理图基本上和利用 ssh tunnel 大致类似：<br><img src="/images/2016/shadowsocks-4.png" alt="shadowsocks-4"></p>
+<h2 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h2><p>于是 <a href="https://github.com/shadowsocks/shadowsocks" target="_blank" rel="noopener">clowwindy</a> 分享并开源了他的解决方案 - <a href="http://shadowsocks.org/" target="_blank" rel="noopener">shadowsocks</a>。<br>简单理解的话，shadowsocks 是将原来 ssh 创建的 Socks5 协议拆开成 server 端和 client 端，所以下面这个原理图基本上和利用 ssh tunnel 大致类似：<br><img src="/images/2016/shadowsocks-4.png" alt="shadowsocks-4"></p>
 <ul>
 <li>1,6) 客户端发出的请求基于 Socks5 协议跟 ss-local 端进行通讯，由于这个 ss-local 一般是本机或路由器或局域网的其他机器，不经过 GFW，所以解决了上面被 GFW 通过特征分析进行干扰的问题;</li>
 <li>2,5) ss-local 和 ss-server 两端通过多种可选的加密方法进行通讯，经过 GFW 的时候是常规的TCP包，没有明显的特征码而且 GFW 也无法对通讯数据进行解密;</li>
 <li>3,4) ss-server 将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务，获取响应原路返回;</li>
 </ul>
 <h1 id="Shadowsocks-使用"><a href="#Shadowsocks-使用" class="headerlink" title="Shadowsocks 使用"></a>Shadowsocks 使用</h1><p>Shadowsocks分为服务器与客户端两部分程序, 其正常使用需要服务端(其实所有的翻墙方式都需要服务端)，搭建服务端需要你拥有一个属于自己的VPS(或者直接购买其他人提供的Shadowsocks服务器帐号)。服务器端程序一般运行在国外的主机即可。</p>
-<h2 id="搭建Shadowsocks服务器"><a href="#搭建Shadowsocks服务器" class="headerlink" title="搭建Shadowsocks服务器"></a>搭建Shadowsocks服务器</h2><p>参考：<a href="http://shadowsocks.blogspot.com/2015/01/shadowsocks.html" target="_blank" rel="noopener">史上最详尽Shadowsocks从零开始一站式翻墙教程</a></p>
+<h2 id="搭建Shadowsocks服务器"><a href="#搭建Shadowsocks服务器" class="headerlink" title="搭建Shadowsocks服务器"></a>搭建Shadowsocks服务器</h2><ul>
+<li><a href="https://github.com/shadowsocks" target="_blank" rel="noopener">github - shadowsocks</a></li>
+<li><a href="http://shadowsocks.blogspot.com/2015/01/shadowsocks.html" target="_blank" rel="noopener">史上最详尽Shadowsocks从零开始一站式翻墙教程</a></li>
+<li><a href="https://cokebar.info/archives/767" target="_blank" rel="noopener">shadowsocks – libev 服务端的部署</a></li>
+<li><a href="https://doub.io/ss-jc26/" target="_blank" rel="noopener">Shadowsocks指导篇</a></li>
+<li><a href="https://doub.io/ss-jc5/" target="_blank" rel="noopener">Shadowsocks libev一键安装脚本</a></li>
+</ul>
 <h3 id="VPS主机选购"><a href="#VPS主机选购" class="headerlink" title="VPS主机选购"></a>VPS主机选购</h3><p>注意：这些VPS服务商网址在部分地区被墙(DNS污染)，需要翻墙访问。不过在上面购买的VPS不受影响（IP直接访问）。</p>
 <ul>
 <li><a href="https://www.digitalocean.com/" target="_blank" rel="noopener">DigitalOcean</a><br>  KVM架构，512MB/1CPU，20GB SSD Disk，1TB流量/月，$5/month($0.007/hour)（折合人民币30元/月）<br>  我个人就是使用<a href="https://www.digitalocean.com/" target="_blank" rel="noopener">DigitalOcean</a>的VPS($5/month)，作为Shadowsocks服务器绰绰有余。<br>  推介计划：点击<a href="https://m.do.co/c/0ffb835591de" target="_blank" rel="noopener">推介地址</a>注册DigitalOcean帐号，可以立即到帐$10用于试用；</li>
 <li><a href="https://bandwagonhost.com/" target="_blank" rel="noopener">搬瓦工(BandwagonHOST)</a><br>  OpenVZ架构，256MB内存，10GB硬盘，500GB流量/月，19.99美元/年（折合人民币10元/月）<br>  OpenVZ架构，512MB内存，20GB硬盘，1TB流量/月，49.99美元/年（折合人民币25元/月）</li>
 <li><a href="https://www.linode.com/" target="_blank" rel="noopener">Linode</a><br>  Xen架构，1GB内存，24GB硬盘，2TB流量/月，10美元/月（折合人民币60元/月）<br>  只推荐给对连接速度和网络延迟有极致追求的用户，一般DigitalOcean或BandwagonHOST足以满足一般翻墙要求。</li>
+<li><a href="https://www.gubo.org/reliable-vps-providers/" target="_blank" rel="noopener">gubo.org - VPS推荐</a></li>
+<li><a href="https://xiaozhou.net/bandwagonhost_annual_pay_vps_stock_refreshed-2018-01-29.html" target="_blank" rel="noopener">搬瓦工19.9刀QN机房双向CN2年付VPS</a></li>
+<li><a href="https://cloud.google.com/" target="_blank" rel="noopener">Google Cloud Platform</a></li>
 </ul>
 <p>DigitalOcean和搬瓦工两家的VPS都支持PayPal付款，DigitalOcean也可以选择在账单里绑定信用卡进行支付。<br>Linode只能使用信用卡支付，官方会随机手工抽查，被抽查到的话需要上传信用卡正反面照片以及可能还需要身份证正反面照片，只要材料真实齐全，审核速度很快，一般一个小时之内就可以全部搞定。账户成功激活以后，就可以安心使用了。</p>
 <blockquote>
@@ -718,7 +727,7 @@ UDP转发：建议勾选，如有问题则取消勾选
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
